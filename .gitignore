@@ -1,0 +1,24 @@
+# miscellaneous
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.git
+ehthumbs.db
+Thumbs.db
+logs
+*.log
+npm-debug.log*
+*.key
+*.crt
+
+# dependencies
+node_modules
+vendor
+reference
+
+# binaries
+build
+dist
+
