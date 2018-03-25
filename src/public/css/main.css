@@ -1,0 +1,49 @@
+/*
+#1D3E53
+#254B62
+#476D7C
+#77ABB7
+*/
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.button--plain {
+  color: #FFF;
+  background-color: #77ABB7;
+  border: 0px solid #FFF;
+}
+
+.button--logout {
+  /* TODO */
+}
+
+.site-header {
+  color: #FFF;
+  background-color: #1D3E53;
+  padding: 1rem;
+}
+
+.app-container {
+  margin: 1rem;
+}
+
+.item-container {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #DDD;
+}
+
+.tag {
+  color: #77ABB7;
+  padding: .2rem;
+}
+.tag:first-child {
+  padding-left: 0;
+}
+.tag:last-child {
+  padding-right: 0;
+}
