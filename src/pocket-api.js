@@ -24,7 +24,7 @@ module.exports = {
   },
   getData: async (consumer_key, access_token, options) => {
     const response = await fetch('https://getpocket.com/v3/get', assignRequestOptions({
-      body: JSON.stringify(Object.assign({consumer_key, access_token}), options)
+      body: JSON.stringify({consumer_key, access_token, ...options})
     }))
     return await response.json()
   }
