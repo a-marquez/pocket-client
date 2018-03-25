@@ -33,6 +33,7 @@ module.exports = async (ctx) => {
     <script src="https://fb.me/react-dom-15.0.0.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flux/3.1.3/Flux.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flux/3.1.3/FluxUtils.min.js"></script>
     <script type='text/babel' src='./js/main.js'></script>
   </body>
 </html>

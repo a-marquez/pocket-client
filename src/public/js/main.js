@@ -2,7 +2,7 @@
   // configuration
   const config = {
     localStorageKey: 'pocketData',
-    pocketDataRequest: ['https://localhost:8080/pocket-data?count=20&detailType=complete', {credentials: 'same-origin'}]
+    pocketDataRequest: ['https://localhost:8080/pocket-data?detailType=complete', {credentials: 'same-origin'}]
   }
 
   // dispatcher
@@ -13,6 +13,9 @@
   }
   const Actions = {
   }
+
+  // store
+  const Store = {}
 
   // functions
   async function hydrateLocalStorageData(localStorageKey, dataRequest) {
@@ -50,6 +53,23 @@
     async componentDidMount() {
       const localStorageData = await hydrateLocalStorageData(config.localStorageKey, config.pocketDataRequest)
       const pocketData = Object.values(localStorageData.list)
+      const dataAge = Math.floor(new Date()/1000) - localStorageData.since
+      const shouldUpdate = dataAge > 10
+      if (shouldUpdate) {
+        fetch(config.pocketDataRequest[0] + `&since=${localStorageData.since}`, config.pocketDataRequest[1])
+          .then((response) => {return response.json()})
+          .then(function(json) {
+            const localStorageData = JSON.parse(localStorage.getItem(config.localStorageKey))
+            Object.values(json.list).forEach((item) => {
+              localStorageData.list[item.item_id] = item
+            })
+            localStorageData.since = json.since
+            localStorage.setItem(config.localStorageKey, JSON.stringify(localStorageData))
+            const pocketData = Object.values(localStorageData.list)
+            this.setState({pocketData})
+          }.bind(this))
+          .catch((error) => {throw (error)})
+      }
       this.setState({pocketData})
     }
     render() {
