@@ -54,6 +54,7 @@ app.use(_.get('/debug', async (ctx) => {
 app.use(_.get('/', hotRouteLoad('./routes/index')))
 app.use(_.get('/success', hotRouteLoad('./routes/success')))
 app.use(_.get('/pocket-data', hotRouteLoad('./routes/pocket-data')))
+app.use(_.get('/logout', hotRouteLoad('./routes/logout')))
 app.use(static('./src/public'))
 
 https.createServer(serverOptions, app.callback()).listen(8080)

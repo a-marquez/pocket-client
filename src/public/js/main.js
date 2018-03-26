@@ -12,18 +12,6 @@
     pocketDataRequest: ['https://localhost:8080/pocket-data?detailType=complete&state=all', {credentials: 'same-origin'}]
   }
 
-  // dispatcher
-  const dispatcher = new Flux.Dispatcher()
-
-  // actions
-  const ActionTypes = {
-  }
-  const Actions = {
-  }
-
-  // store
-  const Store = {}
-
   // functions
   async function hydrateLocalStorageData(localStorageKey, dataRequest) {
     const localStorageData = localStorage.getItem(localStorageKey)

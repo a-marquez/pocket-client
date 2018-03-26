@@ -26,7 +26,7 @@ module.exports = async (ctx) => {
   <body>
     <header class='site-header'>
       <div>Authenticated <b>${ctx.session.pocket_username}</b></div>
-      <button class='button--plain button--logout'>Logout</button>
+      <button class='button--plain button--logout' onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
       <button class='button--plain button--logout' onclick='localStorage.clear()'>Clear cached Pocket data</button>
     </header>
     <div id='root'></div>
