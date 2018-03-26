@@ -39,11 +39,4 @@ html, body {
 
 .tag {
   color: #77ABB7;
-  padding: .2rem;
-}
-.tag:first-child {
-  padding-left: 0;
-}
-.tag:last-child {
-  padding-right: 0;
 }

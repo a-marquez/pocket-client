@@ -27,6 +27,7 @@ module.exports = async (ctx) => {
     <header class='site-header'>
       <div>Authenticated <b>${ctx.session.pocket_username}</b></div>
       <button class='button--plain button--logout'>Logout</button>
+      <button class='button--plain button--logout' onclick='localStorage.clear()'>Clear cached Pocket data</button>
     </header>
     <div id='root'></div>
     <script src="https://fb.me/react-15.0.0.js"></script>
@@ -34,6 +35,7 @@ module.exports = async (ctx) => {
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flux/3.1.3/Flux.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flux/3.1.3/FluxUtils.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
     <script type='text/babel' src='./js/main.js'></script>
   </body>
 </html>

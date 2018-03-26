@@ -1,12 +1,15 @@
 TODO
 ---
-- store all items in localstorage with a 'since' detail
-  - refresh button for manual data update
-  - 'since' detail will be used to update only changed data from pocket servers
+- implement tag filtering
+- implement chronological & alphabetical sort
+- implement grid view
+- allow for showing more details
 - implement logout to clear cookie from server side
-- aggregate all tags at top of app, work as filter buttons
-- flex layout for app body
+- tag filtering
+- archive support
+- flex layout
 - switch to use flux dispatcher, store, actions
+- update on window focus
 
 ## Low Priority
 - proper client side build step
