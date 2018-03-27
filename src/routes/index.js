@@ -24,12 +24,14 @@ module.exports = async (ctx) => {
     <link rel='stylesheet' href='./css/main.css'>
   </head>
   <body>
-    <header class='site-header'>
-      <div>Authenticated <b>${ctx.session.pocket_username}</b></div>
-      <button class='button--plain button--logout' onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
-      <button class='button--plain button--logout' onclick='localStorage.clear()'>Clear cached Pocket data</button>
-    </header>
-    <div id='root'></div>
+    <div class='flex flex-column fill'>
+      <header class='padding text-white back-blue--1'>
+        <div>Authenticated <b>${ctx.session.pocket_username}</b></div>
+        <button onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
+        <button onclick='localStorage.clear()'>Clear cached Pocket data</button>
+      </header>
+      <div id='root' class='flex-grow-1 relative'></div>
+    </div>
     <script src="https://fb.me/react-15.0.0.js"></script>
     <script src="https://fb.me/react-dom-15.0.0.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>

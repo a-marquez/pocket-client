@@ -49,15 +49,15 @@
       const {data} = this.props
       const date = new Date(data.time_added * 1000).toUTCString()
       data.tags = data.tags || {}
-      return (<div className='item-container'>
+      return (<div className='margin__top padding border-gray--light'>
         {data.resolved_title}
         <br/>
         {date}
         <br/>
         <a href={data.resolved_url} target='_blank'>{data.resolved_url}</a>
         <br/>
-        <div className='tags-container'>
-          {Object.values(data.tags).map((tag, index) => {return <button key={index} className='tag'>{tag.tag}</button>})}
+        <div>
+          {Object.values(data.tags).map((tag, index) => {return <button key={index} className='text-blue--4'>{tag.tag}</button>})}
         </div>
       </div>)
     }
@@ -111,17 +111,19 @@
       const isDataLoaded = this.state.pocketData !== undefined
       // TODO: improve filteredPocketData
       const filteredPocketData = when(() => {return this.state.activeTags.length > 0}, filter((item) => {return anyPass(map(contains, this.state.activeTags))(keys(item.tags))}))(this.state.pocketData)
-      return (<div className='app-container'>
-        <div>
-        {isDataLoaded === true
-          ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} style={{color: contains(tag, this.state.activeTags) ? '#77ABB7' : '#000'}}>{tag}</button>}, this.state.tags)
-          : 'Tags placeholder'
-        }
+      return (<div className='absolute flex flex-column fill'>
+        <div className='margin'>
+          {isDataLoaded === true
+            ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} style={{color: contains(tag, this.state.activeTags) ? '#77ABB7' : '#000'}}>{tag}</button>}, this.state.tags)
+            : 'Tags placeholder'
+          }
         </div>
-        {isDataLoaded === true
-          ? map((item) => {return <PocketItem key={item.item_id} data={item} />}, filteredPocketData)
-          : 'PocketItems placeholder'
-        }
+        <div className='flex-grow-1 overflow-auto margin__horizontal'>
+          {isDataLoaded === true
+            ? map((item) => {return <PocketItem key={item.item_id} data={item} />}, filteredPocketData)
+            : 'PocketItems placeholder'
+          }
+        </div>
       </div>)
     }
   }
