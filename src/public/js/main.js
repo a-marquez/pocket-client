@@ -1,10 +1,13 @@
 (function () {
   // dependencies
-  const {compose, prop, propEq, keys, values, isNil, negate} = R
-  const {map, filter, reject, sort, sortBy, splitWhen, uniq, flatten, reverse} = R
+  const {compose, prop, propEq, equals, keys, values, isNil, when, bind, __} = R
+  const {map, forEach, contains, filter, reject, anyPass, append, sort, sortBy, splitWhen, uniq, flatten, reverse} = R
+  const {Dispatcher} = Flux
+  const {Store, Container} = FluxUtils
+  const {Component} = React
 
   // utilities
-  const negateProp = (property) => {return compose(negate, prop(property))}
+  function classBind(context, classFns) {return compose(bind(__, context), forEach((fn) => {context[fn.name] = fn.bind(context)}, classFns))}
 
   // configuration
   const config = {
@@ -12,7 +15,7 @@
     pocketDataRequest: ['https://localhost:8080/pocket-data?detailType=complete&state=all', {credentials: 'same-origin'}]
   }
 
-  // functions
+  // app logic
   async function hydrateLocalStorageData(localStorageKey, dataRequest) {
     const localStorageData = localStorage.getItem(localStorageKey)
     if (localStorageData !== null) {
@@ -35,13 +38,13 @@
   )
 
   const transformRequestDataToPocketData = compose(
-    sortBy(negateProp('time_added')),
+    sort(R.descend(R.prop('time_added'))),
     values,
     prop('list')
   )
 
   // components
-  class PocketItem extends React.Component {
+  class PocketItem extends Component {
     render() {
       const {data} = this.props
       const date = new Date(data.time_added * 1000).toUTCString()
@@ -60,11 +63,21 @@
     }
   }
 
-  class App extends React.Component {
+  class App extends Component {
     constructor(props) {
       super(props)
-      this.state = {}
+      this.state = {
+        activeTags: []
+      }
+      classBind(this, [this.toggleTagFilter])
     }
+
+    toggleTagFilter(event) {
+      const tag = event.target.dataset.tag
+      const activeTags = (contains(tag, this.state.activeTags) ? reject(equals(__)) : append)(tag, this.state.activeTags)
+      this.setState({activeTags})
+    }
+
     async componentDidMount() {
       const localStorageData = await hydrateLocalStorageData(config.localStorageKey, config.pocketDataRequest)
       const pocketData = transformRequestDataToPocketData(localStorageData)
@@ -93,17 +106,20 @@
       }
       this.setState({pocketData, tags: pareToTags(pocketData)})
     }
+
     render() {
       const isDataLoaded = this.state.pocketData !== undefined
+      // TODO: improve filteredPocketData
+      const filteredPocketData = when(() => {return this.state.activeTags.length > 0}, filter((item) => {return anyPass(map(contains, this.state.activeTags))(keys(item.tags))}))(this.state.pocketData)
       return (<div className='app-container'>
         <div>
         {isDataLoaded === true
-          ? this.state.tags.map((tag) => {return <button key={tag}>{tag}</button>})
+          ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} style={{color: contains(tag, this.state.activeTags) ? '#77ABB7' : '#000'}}>{tag}</button>}, this.state.tags)
           : 'Tags placeholder'
         }
         </div>
         {isDataLoaded === true
-          ? this.state.pocketData.map((item) => {return <PocketItem key={item.item_id} data={item} />})
+          ? map((item) => {return <PocketItem key={item.item_id} data={item} />}, filteredPocketData)
           : 'PocketItems placeholder'
         }
       </div>)
