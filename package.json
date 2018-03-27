@@ -14,6 +14,9 @@
     "koa-route": "^3.2.0",
     "koa-session": "^5.8.1",
     "koa-static": "^4.0.2",
-    "node-fetch": "^2.1.1"
+    "koa-stylus-parser": "^2.0.2",
+    "node-fetch": "^2.1.1",
+    "normalize.css.styl": "^4.1.1",
+    "stylus-case": "github:a-marquez/stylus-case"
   }
 }
