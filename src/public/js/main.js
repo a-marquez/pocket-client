@@ -74,7 +74,7 @@
 
     toggleTagFilter(event) {
       const tag = event.target.dataset.tag
-      const activeTags = (contains(tag, this.state.activeTags) ? reject(equals(__)) : append)(tag, this.state.activeTags)
+      const activeTags = (contains(tag, this.state.activeTags) ? compose(reject, equals) : append)(tag)(this.state.activeTags)
       this.setState({activeTags})
     }
 
