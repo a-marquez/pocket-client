@@ -1,21 +1,31 @@
 TODO
 ---
-- style
 
 ## Low Priority
 - switch to use flux dispatcher, store, actions
-- add item count to tags
+- tag functionality
+  - total item count
+  - rename tag
+  - filter to untagged
+  - base identification on ids
+    - this will respect renames outside of app when data updates
+    - this may make renaming simpler
 - client js organisation
   - proper building
+  - try programmatic rollup.js for development
   - comparmentalise client side files
 - pocket item functionality
   - deletion
   - title update
   - url update
-  - tag modification
+  - remove/add tags
   - show all details
   - archive
   - favorite
+- style
+  - improve pocket items container top and bottom borders
+  - general improvements
+- search
 - test link health
   - send a request, try http if https fails
 - basic / advanced mode
@@ -26,3 +36,5 @@ TODO
 - examine traffic with mitmproxy
 - extensive error handling & tests
 - test client-side only logic using a cors proxy to communicate with pocket api
+- linting
+  - git hook for commit

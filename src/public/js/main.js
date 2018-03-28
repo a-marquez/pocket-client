@@ -1,12 +1,16 @@
 (function () {
   // dependencies
   const {compose, prop, propEq, equals, keys, values, isNil, when, bind, __} = R
-  const {map, forEach, contains, filter, reject, anyPass, append, sort, sortBy, splitWhen, uniq, flatten, reverse} = R
+  const {map, addIndex, forEach, contains, filter, reject, anyPass, append, sort, splitWhen, uniq, flatten, reverse} = R
   const {Dispatcher} = Flux
   const {Store, Container} = FluxUtils
   const {Component} = React
 
   // utilities
+  const mapIndexed = addIndex(map)
+  function log(_) {console.log(_); return _}
+  function debug(_) {debugger; return _}
+  const domainRegex = /(?:https?:\/\/)(?:www\.)?([^\/]+)/
   function bindClassFns(context, classFnNames) {forEach((fnName) => {context[fnName] = context[fnName].bind(context)}, classFnNames)}
 
   // configuration
@@ -47,17 +51,20 @@
   class PocketItem extends Component {
     render() {
       const {data} = this.props
-      const date = new Date(data.time_added * 1000).toUTCString()
-      data.tags = data.tags || {}
-      return (<div className='margin__top padding border-gray--light'>
-        {data.resolved_title}
-        <br/>
-        {date}
-        <br/>
-        <a href={data.resolved_url} target='_blank'>{data.resolved_url}</a>
-        <br/>
-        <div>
-          {Object.values(data.tags).map((tag, index) => {return <button key={index} className='text-blue--4'>{tag.tag}</button>})}
+      const title = data.resolved_title || data.given_title
+      const date = new Date(data.time_added * 1000).toUTCString().split(' ').slice(1, 4).join(' ')
+      const domain = (data.resolved_url || data.given_url).match(domainRegex)[1]
+      const tags = isNil(data.tags) ? '' : compose(mapIndexed((tag, index) => {return <span key={index} className='chip'>{tag.tag}</span>}), values)(data.tags)
+      return (<div className='card no-border__top'>
+        <div className='card-body'>
+          <a href={data.resolved_url} target='_blank'>
+            <div className='card-title text-black h6 pointer'>
+              {title}
+              <span className='float-right text-gray'>{date}</span>
+            </div>
+          </a>
+          <div className='float-right relative' style={{right: '-.5em'}}>{tags}</div>
+          <div className='card-subtitle text-gray'>{domain}</div>
         </div>
       </div>)
     }
@@ -115,13 +122,15 @@
         <div className='margin'>
           {isDataLoaded === true
             ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} className={'btn btn-sm ' + (ifTagActive(tag) ? 'btn-primary' : '')}>{tag}</button>}, this.state.tags)
-            : 'Tags placeholder'
+            : <div className='loading loading-lg'></div>
           }
         </div>
-        <div className='flex-grow-1 overflow-auto margin__horizontal'>
+        <div className='flex-grow-1 overflow-auto padding__horizontal margin__bottom'>
+          <div className='absolute floating-border'></div>
+          <div className='absolute floating-border' style={{bottom: '1rem'}}></div>
           {isDataLoaded === true
             ? map((item) => {return <PocketItem key={item.item_id} data={item} />}, filteredPocketData)
-            : 'PocketItems placeholder'
+            : ''
           }
         </div>
       </div>)

@@ -7,8 +7,23 @@ module.exports = async (ctx) => {
     const authentication_url = `https://getpocket.com/auth/authorize?request_token=${response_json.code}&redirect_uri=https://localhost:8080/success`
     ctx.session.pocket_request_token = response_json.code
     ctx.body = `
-      <div>Unauthenticated</div>
-      <a href='${authentication_url}'><button>Login</button></a>
+      <link rel='stylesheet' href='./css/main.css'>
+      <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+      <body style='overflow: hidden;'>
+        <header class='padding text-white back-blue--1'>
+          <div class='relative'>
+            <div class='absolute fill__horizontal'>
+              <a href='${authentication_url}'>
+                <button class='btn btn-sm btn-primary float-right'>Login</button>
+              </a>
+            </div>
+            <div><h4>Pocket Client</h4></div>
+          <div>
+        </header>
+        <div class='empty fill__vertical'>Please <a href='${authentication_url}'>login</a>.</div>
+      </body>
     `
   } else {
     const response_json = await pocket.getData(config.pocket_consumer_key, ctx.session.pocket_access_token, {count: 10, detailType: 'complete'})
@@ -22,13 +37,20 @@ module.exports = async (ctx) => {
     <meta name='description' content='Pocket Client'>
     <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
     <link rel='stylesheet' href='./css/main.css'>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
   </head>
   <body>
     <div class='flex flex-column fill'>
       <header class='padding text-white back-blue--1'>
-        <div>Authenticated <b>${ctx.session.pocket_username}</b></div>
-        <button onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
-        <button onclick='localStorage.clear()'>Clear cached Pocket data</button>
+        <div class='relative'>
+          <div class='absolute fill__horizontal'>
+            <button class='btn btn-sm btn-primary float-right' onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
+          </div>
+          <div><h4>Pocket Client</h4></div>
+          <div>Welcome, <b>${ctx.session.pocket_username}</b></div>
+        <div>
       </header>
       <div id='root' class='flex-grow-1 relative'></div>
     </div>
