@@ -6,7 +6,7 @@ const session = require('koa-session')
 const stylus = require('koa-stylus-parser')
 const static = require('koa-static')
 
-const {hotRouteLoad} = require('./utilities')
+const {hotRouteLoad, stringifyPretty} = require('./utilities')
 const config = require('./config')
 const pocket = require('./pocket-api')
 
@@ -49,7 +49,7 @@ app.use(async (ctx, next) => {
 
 // debug
 app.use(_.get('/debug', async (ctx) => {
-  ctx.body = `<b>Cookie:</b><pre>\n${JSON.stringify(ctx.session, null, '\t')}</pre>`
+  ctx.body = `<b>Cookie:</b><pre>\n${stringifyPretty(ctx.session)}</pre>`
 }))
 
 app.use(_.get('/', hotRouteLoad('./routes/index')))

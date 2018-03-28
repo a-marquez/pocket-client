@@ -17,6 +17,7 @@
     "koa-stylus-parser": "^2.0.2",
     "node-fetch": "^2.1.1",
     "normalize.css.styl": "^4.1.1",
+    "ramda": "^0.25.0",
     "stylus-case": "github:a-marquez/stylus-case"
   }
 }

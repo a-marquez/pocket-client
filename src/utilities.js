@@ -8,5 +8,7 @@ const self = module.exports = {
     return async (ctx) => {
       return self.hotRequire(routePath)(ctx)
     }
-  }
+  },
+
+  stringifyPretty: (_) => {return JSON.stringify(_, null, 2)}
 }
