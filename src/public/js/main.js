@@ -7,7 +7,7 @@
   const {Component} = React
 
   // utilities
-  function classBind(context, classFns) {return compose(bind(__, context), forEach((fn) => {context[fn.name] = fn.bind(context)}, classFns))}
+  function bindClassFns(context, classFnNames) {forEach((fnName) => {context[fnName] = context[fnName].bind(context)}, classFnNames)}
 
   // configuration
   const config = {
@@ -69,7 +69,7 @@
       this.state = {
         activeTags: []
       }
-      classBind(this, [this.toggleTagFilter])
+      bindClassFns(this, ['toggleTagFilter'])
     }
 
     toggleTagFilter(event) {
@@ -83,7 +83,7 @@
       const pocketData = transformRequestDataToPocketData(localStorageData)
       const dataAge = Math.floor(new Date()/1000) - localStorageData.since
       const shouldUpdate = dataAge > 5
-      if (shouldUpdate) {
+      if (shouldUpdate === true) {
         fetch(config.pocketDataRequest[0] + `&since=${localStorageData.since}`, config.pocketDataRequest[1])
           .then((response) => {return response.json()})
           .then(function(json) {
@@ -109,12 +109,12 @@
 
     render() {
       const isDataLoaded = this.state.pocketData !== undefined
-      // TODO: improve filteredPocketData
       const filteredPocketData = when(() => {return this.state.activeTags.length > 0}, filter((item) => {return anyPass(map(contains, this.state.activeTags))(keys(item.tags))}))(this.state.pocketData)
+      const ifTagActive = contains(__, this.state.activeTags)
       return (<div className='absolute flex flex-column fill'>
         <div className='margin'>
           {isDataLoaded === true
-            ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} style={{color: contains(tag, this.state.activeTags) ? '#77ABB7' : '#000'}}>{tag}</button>}, this.state.tags)
+            ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} className={'btn btn-sm ' + (ifTagActive(tag) ? 'btn-primary' : '')}>{tag}</button>}, this.state.tags)
             : 'Tags placeholder'
           }
         </div>
