@@ -10,7 +10,7 @@
   const mapIndexed = addIndex(map)
   function log(_) {console.log(_); return _}
   function debug(_) {debugger; return _}
-  const domainRegex = /(?:https?:\/\/)(?:www\.)?([^\/]+)/
+  const domainRegex = /(?:https?)?(?::\/\/)?(?:www\.)?([\w\.]+)/
   function bindClassFns(context, classFnNames) {forEach((fnName) => {context[fnName] = context[fnName].bind(context)}, classFnNames)}
 
   // configuration
