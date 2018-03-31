@@ -34,7 +34,7 @@ app.use(async (ctx, next) => {
 })
 
 // session
-app.keys = [process.env.GENERAL_SALT]
+app.keys = [config.secret]
 app.use(session(config.session, app))
 
 // update cookie
@@ -56,6 +56,7 @@ app.use(_.get('/', hotRouteLoad('./routes/index')))
 app.use(_.get('/success', hotRouteLoad('./routes/success')))
 app.use(_.get('/pocket-data', hotRouteLoad('./routes/pocket-data')))
 app.use(_.get('/logout', hotRouteLoad('./routes/logout')))
+app.use(_.get('/js/main2.js', hotRouteLoad('./routes/compiler.js')))
 app.use(stylus('./src/public', {use: [require('normalize.css.styl')(), require('stylus-case')()]}))
 app.use(static('./src/public'))
 

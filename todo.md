@@ -1,7 +1,12 @@
 TODO
 ---
+- client js organisation
+  - proper building
+  - try programmatic rollup.js for development
+  - comparmentalise client side files
 
 ## Low Priority
+- add .env and .env.example, references: https://www.reddit.com/r/node/comments/75oyru/please_add_env_to_gitignore/ https://github.com/motdotla/dotenv
 - switch to use flux dispatcher, store, actions
 - tag functionality
   - total item count
@@ -10,10 +15,6 @@ TODO
   - base identification on ids
     - this will respect renames outside of app when data updates
     - this may make renaming simpler
-- client js organisation
-  - proper building
-  - try programmatic rollup.js for development
-  - comparmentalise client side files
 - pocket item functionality
   - deletion
   - title update

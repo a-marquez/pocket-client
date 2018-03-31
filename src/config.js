@@ -1,5 +1,7 @@
+const env = JSON.parse(JSON.stringify(process.env))
 module.exports = {
-  pocket_consumer_key: process.env.POCKET_CONSUMER_KEY,
+  secret: env.GENERAL_SALT,
+  pocket_consumer_key: env.POCKET_CONSUMER_KEY,
   pocket_redirect_uri: 'localhost:8080/success',
   session: {
     key: 'koa:sess',
