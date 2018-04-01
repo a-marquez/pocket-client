@@ -12,11 +12,11 @@ module.exports = async (ctx) => {
       <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
       <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
       <body style='overflow: hidden;'>
-        <header class='padding text-white back-blue--1'>
+        <header class='padding__horizontal padding--small__vertical text-white back-blue--1'>
           <div class='relative'>
             <div class='absolute fill__horizontal'>
               <a href='${authentication_url}'>
-                <button class='btn btn-sm btn-primary float-right'>Login</button>
+                <button class='btn btn-sm btn-success float-right'>Login</button>
               </a>
             </div>
             <div><h4>Pocket Client</h4></div>
@@ -43,16 +43,16 @@ module.exports = async (ctx) => {
   </head>
   <body>
     <div class='flex flex-column fill'>
-      <header class='padding text-white back-blue--1'>
+      <header class='padding__horizontal padding--small__vertical text-white back-blue--1'>
         <div class='relative'>
           <div class='absolute fill__horizontal'>
-            <button class='btn btn-sm btn-primary float-right' onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
+            <button class='btn btn-sm btn-error float-right' onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
           </div>
           <div><h4>Pocket Client</h4></div>
           <div>Welcome, <b>${ctx.session.pocket_username}</b></div>
         <div>
       </header>
-      <div id='root' class='flex-grow-1 relative'></div>
+      <div id='root' class='flex-grow-1 relative bg-secondary'></div>
       <script src='./js/main.js'></script>
     </div>
   </body>

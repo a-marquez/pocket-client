@@ -1,13 +1,18 @@
 TODO
 ---
-- tag functionality
-  - filter to untagged
+- style
+  - improve pocket items container top and bottom borders
 - pocket item functionality
   - deletion
-  - remove/add tags
+    - refactor pocket-data.js route to pocket-get.js route
+    - implement pocket-send.js route
+  - edit
+    - remove/add tags
+- implement tag container visibility toggle
 - rollmap sourcemaps
 
 ## Low Priority
+- add favicon to left of title
 - switch to flux or redux, perhaps explore other options
   - make components pure
 - tag functionality
@@ -17,13 +22,15 @@ TODO
     - this will respect renames outside of app when data updates
     - this may make renaming simpler
 - pocket item functionality
-  - title update
-  - url update
-  - show all details
-  - archive
-  - favorite
+  - add actions
+    - archive
+    - favorite
+    - edit
+      - title update
+      - url update
+    - more
+      - show all details
 - style
-  - improve pocket items container top and bottom borders
   - general improvements
 - search
 - implement asc/desc chronological & alphabetical sort

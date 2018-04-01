@@ -1,6 +1,7 @@
 import React from 'react'
 import {Component} from 'react'
-import {compose, prop, propEq, equals, keys, values, descend, isNil, anyPass, when, bind, __} from 'ramda'
+import * as R from 'ramda'
+import {compose, prop, propEq, equals, keys, values, descend, isNil, anyPass, when, bind, __, cond, T, identity, has} from 'ramda'
 import {map, contains, filter, reject, append, sort, splitWhen, uniq, flatten} from 'ramda'
 
 import PocketItem from './components/PocketItem.js'
@@ -39,15 +40,21 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeTags: []
+      activeTags: [],
+      untagged: false
     }
-    bindClassFns(this, ['toggleTagFilter'])
+    bindClassFns(this, ['toggleTagFilter', 'toggleUntaggedFilter'])
   }
 
   toggleTagFilter(event) {
     const tag = event.target.dataset.tag
     const activeTags = (contains(tag, this.state.activeTags) ? compose(reject, equals) : append)(tag)(this.state.activeTags)
     this.setState({activeTags})
+  }
+
+  toggleUntaggedFilter() {
+    const untagged = !this.state.untagged
+    this.setState({untagged})
   }
 
   async componentDidMount() {
@@ -81,14 +88,30 @@ export default class App extends Component {
 
   render() {
     const isDataLoaded = this.state.pocketData !== undefined
-    const filteredPocketData = when(() => {return this.state.activeTags.length > 0}, filter((item) => {return anyPass(map(contains, this.state.activeTags))(keys(item.tags))}))(this.state.pocketData)
+    const isUntaggedFilterEnabled = this.state.untagged === true
+    const filteredPocketData = cond([
+      [() => {return isUntaggedFilterEnabled}, reject(has('tags'))],
+      [() => {return this.state.activeTags.length > 0}, filter((item) => {return anyPass(map(contains, this.state.activeTags))(keys(item.tags))})],
+      [T, identity]
+    ])(this.state.pocketData)
     const ifTagActive = contains(__, this.state.activeTags)
     return (<div className='absolute flex flex-column fill'>
       <div className='margin'>
+        <div className='tags-container'>
         {isDataLoaded === true
-          ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} className={'btn btn-sm ' + (ifTagActive(tag) ? 'btn-primary' : '')}>{tag}</button>}, this.state.tags)
+          ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} className={`btn btn-sm ${ifTagActive(tag) ? 'btn-primary' : ''}`} disabled={isUntaggedFilterEnabled}>{tag}</button>}, this.state.tags)
           : <div className='loading loading-lg'></div>
         }
+        </div>
+        <div>
+          {isDataLoaded === true
+            ? (<div className='margin__top float-right'>
+              <button onClick={this.toggleUntaggedFilter} className={`btn btn-sm margin--small__right ${isUntaggedFilterEnabled ? 'btn-primary' : ''}`}>untagged</button>
+              <button className='btn btn-sm btn-action'><i className='icon icon-arrow-up'></i></button>
+            </div>)
+            : ''
+          }
+        </div>
       </div>
       <div className='flex-grow-1 overflow-auto padding__horizontal margin__bottom'>
         <div className='absolute floating-border'></div>
