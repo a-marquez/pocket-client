@@ -98,28 +98,31 @@ export default class App extends Component {
     return (<div className='absolute flex flex-column fill'>
       <div className='margin'>
         <div className='tags-container'>
-        {isDataLoaded === true
-          ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} className={`btn btn-sm ${ifTagActive(tag) ? 'btn-primary' : ''}`} disabled={isUntaggedFilterEnabled}>{tag}</button>}, this.state.tags)
-          : <div className='loading loading-lg'></div>
-        }
+          {isDataLoaded
+            ? map((tag) => {return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} className={`btn btn-sm ${ifTagActive(tag) ? 'btn-primary' : ''}`} disabled={isUntaggedFilterEnabled}>{tag}</button>}, this.state.tags)
+            : <div className='loading loading-lg'></div>
+          }
         </div>
-        <div>
-          {isDataLoaded === true
-            ? (<div className='margin__top float-right'>
-              <button onClick={this.toggleUntaggedFilter} className={`btn btn-sm margin--small__right ${isUntaggedFilterEnabled ? 'btn-primary' : ''}`}>untagged</button>
+        {isDataLoaded
+          ? (<div>
+            <div className='margin__top absolute'>
               <button className='btn btn-sm btn-action'><i className='icon icon-arrow-up'></i></button>
-            </div>)
+              <button onClick={this.toggleUntaggedFilter} className={`btn btn-sm margin--small__left ${isUntaggedFilterEnabled ? 'btn-primary' : ''}`}>untagged</button>
+            </div>
+            <div className='margin__top float-right'>
+              <button className='btn btn-sm btn-action'><i className='icon icon-plus'></i></button>
+            </div>
+          </div>)
+          : ''
+        }
+      </div>
+      <div className='flex-grow-1 overflow-auto margin__horizontal margin__bottom fill__vertical'>
+        <div className='item-container overflow-auto fill__vertical back-white'>
+          {isDataLoaded === true
+            ? map((item) => {return <PocketItem key={item.item_id} data={item} />}, filteredPocketData)
             : ''
           }
         </div>
-      </div>
-      <div className='flex-grow-1 overflow-auto padding__horizontal margin__bottom'>
-        <div className='absolute floating-border'></div>
-        <div className='absolute floating-border' style={{bottom: '1rem'}}></div>
-        {isDataLoaded === true
-          ? map((item) => {return <PocketItem key={item.item_id} data={item} />}, filteredPocketData)
-          : ''
-        }
       </div>
     </div>)
   }

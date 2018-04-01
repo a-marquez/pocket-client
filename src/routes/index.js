@@ -46,7 +46,7 @@ module.exports = async (ctx) => {
       <header class='padding__horizontal padding--small__vertical text-white back-blue--1'>
         <div class='relative'>
           <div class='absolute fill__horizontal'>
-            <button class='btn btn-sm btn-error float-right' onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
+            <button class='btn btn-sm btn-error margin--small__vertical float-right' onclick='localStorage.clear(); document.location.href="/logout"'>Logout</button>
           </div>
           <div><h4>Pocket Client</h4></div>
           <div>Welcome, <b>${ctx.session.pocket_username}</b></div>

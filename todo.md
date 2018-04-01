@@ -1,7 +1,5 @@
 TODO
 ---
-- style
-  - improve pocket items container top and bottom borders
 - pocket item functionality
   - deletion
     - refactor pocket-data.js route to pocket-get.js route
@@ -12,7 +10,6 @@ TODO
 - rollmap sourcemaps
 
 ## Low Priority
-- add favicon to left of title
 - switch to flux or redux, perhaps explore other options
   - make components pure
 - tag functionality
@@ -31,6 +28,8 @@ TODO
     - more
       - show all details
 - style
+  - add favicon to left of pocket item title
+  - emphasise main domain (google in images.google.com) through larger font size
   - general improvements
 - search
 - implement asc/desc chronological & alphabetical sort
@@ -40,6 +39,10 @@ TODO
 - examine traffic with mitmproxy
 - test client-side only logic using a cors proxy to communicate with pocket api
 - experiments
+  - status line at bottom
+    - items counts for current / total
+    - tag counts
+    - current request progress (add/delete/modify)
   - test link health
     - send a request, try http if https fails
   - tag suggestion

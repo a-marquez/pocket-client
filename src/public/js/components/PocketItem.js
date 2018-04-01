@@ -36,7 +36,7 @@ export default class PocketItem extends Component {
       <button className='btn btn-sm btn-action margin--small__right'><i className='icon icon-delete' /></button>
       <button className='btn btn-sm btn-action'><i className='icon icon-more-vert' /></button>
     </div>)
-    return (<div onMouseEnter={this.enableHover} onMouseLeave={this.disableHover} className={`card no-border__top`}>
+    return (<div onMouseEnter={this.enableHover} onMouseLeave={this.disableHover} className='card padding--small__right'>
       <div className='card-body'>
         <div className='card-title'>
           <a href={data.resolved_url} className='text-black h6' target='_blank'>{title}</a>
