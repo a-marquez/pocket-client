@@ -13,7 +13,10 @@ export default {
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
-      presets: [ [ 'es2015', { modules: false } ], 'stage-0', 'react' ],
+      presets: [
+        ['env', { modules: false, targets: {browsers: ['last 2 versions']} }],
+        'react'
+      ],
       plugins: [ 'external-helpers' ]
     }),
     commonjs({

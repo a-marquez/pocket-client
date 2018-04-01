@@ -52,8 +52,7 @@ module.exports = async (ctx) => {
           <div>Welcome, <b>${ctx.session.pocket_username}</b></div>
         <div>
       </header>
-      <div id='root' class='flex-grow-1 relative' style='display: none;'></div>
-      <div id='root2' class='flex-grow-1 relative'></div>
+      <div id='root' class='flex-grow-1 relative'></div>
       <script src='./js/main2.js'></script>
     </div>
 ` +

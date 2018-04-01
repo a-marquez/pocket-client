@@ -5,6 +5,7 @@ TODO
   - try programmatic rollup.js for development
   - comparmentalise client side files
 - cleanup unnecessary stylus boilerplate
+- differntiate identically named client/server files
 
 ## Low Priority
 - add .env and .env.example, references: https://www.reddit.com/r/node/comments/75oyru/please_add_env_to_gitignore/ https://github.com/motdotla/dotenv
