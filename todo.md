@@ -1,23 +1,24 @@
 TODO
 ---
-- client js organisation
-  - comparmentalise client side files
+- tag functionality
+  - filter to untagged
+- pocket item functionality
+  - deletion
+  - remove/add tags
+- rollmap sourcemaps
 
 ## Low Priority
-- add .env and .env.example, references: https://www.reddit.com/r/node/comments/75oyru/please_add_env_to_gitignore/ https://github.com/motdotla/dotenv
-- switch to use flux dispatcher, store, actions
+- switch to flux or redux, perhaps explore other options
+  - make components pure
 - tag functionality
   - total item count
   - rename tag
-  - filter to untagged
   - base identification on ids
     - this will respect renames outside of app when data updates
     - this may make renaming simpler
 - pocket item functionality
-  - deletion
   - title update
   - url update
-  - remove/add tags
   - show all details
   - archive
   - favorite
@@ -25,15 +26,23 @@ TODO
   - improve pocket items container top and bottom borders
   - general improvements
 - search
-- test link health
-  - send a request, try http if https fails
-- basic / advanced mode
 - implement asc/desc chronological & alphabetical sort
 - implement grid view
 - update on window focus
 - test/implement offline support
 - examine traffic with mitmproxy
-- extensive error handling & tests
 - test client-side only logic using a cors proxy to communicate with pocket api
-- linting
-  - git hook for commit
+- experiments
+  - test link health
+    - send a request, try http if https fails
+  - tag suggestion
+  - simple/reading mode
+    - hide ui and simplify app
+- development/maintenance
+  - extensive error handling & tests
+  - add .env and .env.example
+    - references: https://www.reddit.com/r/node/comments/75oyru/please_add_env_to_gitignore/ https://github.com/motdotla/dotenv
+  - tests
+  - linting
+    - standard js
+    - git hook for commit, reject on fail

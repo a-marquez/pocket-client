@@ -14,7 +14,7 @@ export default {
       babelrc: false,
       exclude: 'node_modules/**',
       presets: [
-        ['env', { modules: false, targets: {browsers: ['last 2 versions']} }],
+        ['env', { modules: false, targets: {browsers: ['last 2 Chrome versions']} }],
         'react'
       ],
       plugins: [ 'external-helpers' ]
@@ -32,13 +32,13 @@ export default {
       browser: true,
       main: true
     }),
-    uglify({
-      compress: {
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        warnings: false }
-    })
+    // uglify({
+    //   compress: {
+    //     pure_getters: true,
+    //     unsafe: true,
+    //     unsafe_comps: true,
+    //     warnings: false }
+    // })
   ],
   output: {
     format: 'iife',
