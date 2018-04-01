@@ -1,4 +1,4 @@
-const config = require('../config')
+const config = require('../server-config')
 const pocket = require('../pocket-api')
 
 module.exports = async (ctx) => {

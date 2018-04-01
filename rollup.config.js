@@ -8,7 +8,7 @@ const nodeResolve = require('rollup-plugin-node-resolve')
 const replace = require('rollup-plugin-replace')
 
 export default {
-  input: './src/public/js/main2.js',
+  input: './src/public/js/main.js',
   plugins: [
     babel({
       babelrc: false,
@@ -27,7 +27,7 @@ export default {
       }
     }),
     nodeGlobals(),
-    replace({ 'process.enve.NODE_ENV': JSON.stringify('development') }),
+    replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
     nodeResolve({
       browser: true,
       main: true
@@ -42,6 +42,6 @@ export default {
   ],
   output: {
     format: 'iife',
-    file: './build/js/main2.js'
+    file: './build/js/main.js'
   }
 }

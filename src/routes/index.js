@@ -1,4 +1,4 @@
-const config = require('../config')
+const config = require('../server-config')
 const pocket = require('../pocket-api')
 
 module.exports = async (ctx) => {
@@ -53,17 +53,8 @@ module.exports = async (ctx) => {
         <div>
       </header>
       <div id='root' class='flex-grow-1 relative'></div>
-      <script src='./js/main2.js'></script>
+      <script src='./js/main.js'></script>
     </div>
-` +
-    // <script src="https://fb.me/react-15.0.0.js"></script>
-    // <script src="https://fb.me/react-dom-15.0.0.js"></script>
-    // <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
-    // <script src="https://cdnjs.cloudflare.com/ajax/libs/flux/3.1.3/Flux.min.js"></script>
-    // <script src="https://cdnjs.cloudflare.com/ajax/libs/flux/3.1.3/FluxUtils.min.js"></script>
-    // <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.js"></script>
-    // <script type='text/babel' src='./js/main.js'></script>
-`
   </body>
 </html>
     `

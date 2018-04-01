@@ -6,8 +6,8 @@ const session = require('koa-session')
 const stylus = require('koa-stylus-parser')
 const static = require('koa-static')
 
-const {hotRouteLoad, stringifyPretty} = require('./utilities')
-const config = require('./config')
+const {hotRouteLoad, stringifyPretty} = require('./node-utilities')
+const config = require('./server-config')
 const pocket = require('./pocket-api')
 
 const serverOptions = {
@@ -61,3 +61,4 @@ app.use(static('./src/public', {defer: true}))
 app.use(static('./build/'))
 
 https.createServer(serverOptions, app.callback()).listen(8080)
+console.log('server listening on port 8080')
