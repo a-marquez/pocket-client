@@ -7,7 +7,7 @@ import {map, contains, filter, reject, append, sort, splitWhen, uniq, flatten} f
 import PocketItem from './components/PocketItem.js'
 
 import config from './config.js'
-import {bindClassFns, log, debug} from './utilities.js'
+import {bindClassFns, getUnixEpoch, log, debug} from './utilities.js'
 
 async function hydrateLocalStorageData(localStorageKey, dataRequest) {
   const localStorageData = localStorage.getItem(localStorageKey)
@@ -60,7 +60,7 @@ export default class App extends Component {
   async componentDidMount() {
     const localStorageData = await hydrateLocalStorageData(config.localStorageKey, config.pocketDataRequest)
     const pocketData = transformRequestDataToPocketData(localStorageData)
-    const dataAge = Math.floor(new Date()/1000) - localStorageData.since
+    const dataAge = getUnixEpoch() - localStorageData.since
     const shouldUpdate = dataAge > 5
     if (shouldUpdate === true) {
       fetch(config.pocketDataRequest[0] + `&since=${localStorageData.since}`, config.pocketDataRequest[1])
