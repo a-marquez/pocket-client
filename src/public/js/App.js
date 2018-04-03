@@ -43,7 +43,7 @@ export default class App extends Component {
       activeTags: [],
       untagged: false
     }
-    bindClassFns(this, ['toggleTagFilter', 'toggleUntaggedFilter'])
+    bindClassFns(this, ['userRefreshData', 'toggleTagFilter', 'toggleUntaggedFilter'])
   }
 
   toggleTagFilter(event) {
@@ -57,33 +57,55 @@ export default class App extends Component {
     this.setState({untagged})
   }
 
-  async componentDidMount() {
-    const localStorageData = await hydrateLocalStorageData(config.localStorageKey, config.pocketDataRequest)
-    const pocketData = transformRequestDataToPocketData(localStorageData)
-    const dataAge = getUnixEpoch() - localStorageData.since
-    const shouldUpdate = dataAge > 5
-    if (shouldUpdate === true) {
-      fetch(config.pocketDataRequest[0] + `&since=${localStorageData.since}`, config.pocketDataRequest[1])
+  async refreshData(since) {
+    return new Promise((resolve, reject) => {
+      fetch(config.pocketGetDataRequest[0] + `&since=${since}`, config.pocketGetDataRequest[1])
         .then((response) => {return response.json()})
         .then(function(json) {
           let localStorageData = JSON.parse(localStorage.getItem(config.localStorageKey))
+          let state
           if (keys(json.list).length > 0) {
             const [updateItems, deletionItems] = splitWhen(propEq('status', '2'), values(json.list))
+            console.info('refreshData updateItems', updateItems)
+            console.info('refreshData deletionItems', deletionItems)
             deletionItems.forEach((item) => {
               delete localStorageData.list[item.item_id]
             })
             updateItems.forEach((item) => {
               localStorageData.list[item.item_id] = item
             })
-            let pocketData = transformRequestDataToPocketData(localStorageData)
-            this.setState({pocketData, tags: pareToTags(pocketData)})
+            const pocketData = transformRequestDataToPocketData(localStorageData)
+            state = {pocketData, tags: pareToTags(pocketData)}
           }
           localStorageData.since = json.since
           localStorage.setItem(config.localStorageKey, JSON.stringify(localStorageData))
-        }.bind(this))
-        .catch((error) => {throw (error)})
+          console.info('refreshData state', state)
+          resolve(state)
+        })
+        .catch(reject)
+    })
+  }
+
+  async userRefreshData() {
+    const since = JSON.parse(localStorage.getItem(config.localStorageKey)).since
+    const newState = await this.refreshData(since)
+    console.info('userRefreshData newState', newState)
+    if (newState !== undefined) {this.setState(newState)}
+  }
+
+  async componentDidMount() {
+    const localStorageData = await hydrateLocalStorageData(config.localStorageKey, config.pocketGetDataRequest)
+    const pocketData = transformRequestDataToPocketData(localStorageData)
+    const state = {pocketData, tags: pareToTags(pocketData)}
+    const dataAge = getUnixEpoch() - localStorageData.since
+    const shouldUpdate = dataAge > 5
+    console.info('componentDidMount state', state)
+    this.setState(state)
+    if (shouldUpdate === true) {
+      const newState = await this.refreshData(localStorageData.since)
+      console.info('componentDidMount newState', newState)
+      if (newState !== undefined) {this.setState(newState)}
     }
-    this.setState({pocketData, tags: pareToTags(pocketData)})
   }
 
   render() {
@@ -111,6 +133,7 @@ export default class App extends Component {
             </div>
             <div className='margin__top float-right'>
               <button className='btn btn-sm btn-action'><i className='icon icon-plus'></i></button>
+              <button onClick={this.userRefreshData} className='btn btn-sm btn-action margin--small__left'><i className='icon icon-refresh'></i></button>
             </div>
           </div>)
           : ''

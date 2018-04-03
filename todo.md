@@ -1,18 +1,16 @@
 TODO
 ---
 - pocket item functionality
-  - deletion
-    - refactor pocket-data.js route to pocket-get.js route
-    - implement pocket-send.js route
   - edit
     - remove/add tags
 - implement tag container visibility toggle
 - rollmap sourcemaps
 
 ## Low Priority
-- switch to flux or redux, perhaps explore other options
+- switch to redux, poke around other options
   - make components pure
 - tag functionality
+  - cache last filtered & untagged for quick toggling between
   - total item count
   - rename tag
   - base identification on ids
@@ -27,8 +25,11 @@ TODO
       - url update
     - more
       - show all details
+- ux
+  - loading/disabled states
 - style
   - add favicon to left of pocket item title
+  - fix height jitter on single line untagged items when action bar comes in view
   - emphasise main domain (google in images.google.com) through larger font size
   - general improvements
 - search
@@ -39,6 +40,9 @@ TODO
 - examine traffic with mitmproxy
 - test client-side only logic using a cors proxy to communicate with pocket api
 - experiments
+  - batch regex edit
+    - name/tag names/url
+    - live preview
   - status line at bottom
     - items counts for current / total
     - tag counts
@@ -48,6 +52,8 @@ TODO
   - tag suggestion
   - simple/reading mode
     - hide ui and simplify app
+  - add ability to bulk import/tag from other services
+    - github
 - development/maintenance
   - extensive error handling & tests
   - add .env and .env.example

@@ -6,7 +6,7 @@ const session = require('koa-session')
 const stylus = require('koa-stylus-parser')
 const static = require('koa-static')
 
-const {hotRouteLoad, stringifyPretty} = require('./node-utilities')
+const {hotRouteLoad} = require('./node-utilities')
 const config = require('./server-config')
 const pocket = require('./pocket-api')
 
@@ -48,13 +48,12 @@ app.use(async (ctx, next) => {
 })
 
 // debug
-app.use(_.get('/debug', async (ctx) => {
-  ctx.body = `<b>Cookie:</b><pre>\n${stringifyPretty(ctx.session)}</pre>`
-}))
+app.use(_.get('/debug', hotRouteLoad('./routes/debug')))
 
 app.use(_.get('/', hotRouteLoad('./routes/index')))
 app.use(_.get('/success', hotRouteLoad('./routes/success')))
-app.use(_.get('/pocket-data', hotRouteLoad('./routes/pocket-data')))
+app.use(_.get('/pocket-get', hotRouteLoad('./routes/pocket-get')))
+app.use(_.get('/pocket-send', hotRouteLoad('./routes/pocket-send')))
 app.use(_.get('/logout', hotRouteLoad('./routes/logout')))
 app.use(stylus('./src/public', {use: [require('normalize.css.styl')(), require('stylus-case')()]}))
 app.use(static('./src/public', {defer: true}))

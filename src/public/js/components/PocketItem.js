@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {compose, addIndex, map, values, isNil} from 'ramda'
 
-import {bindClassFns, domainRegex} from '../utilities.js'
+import {bindClassFns, domainRegex, getUnixEpoch} from '../utilities.js'
+import config from '../config.js'
 
 const mapIndexed = addIndex(map)
 
@@ -11,7 +12,7 @@ export default class PocketItem extends Component {
     this.state = {
       hover: false
     }
-    bindClassFns(this, ['disableHover', 'enableHover'])
+    bindClassFns(this, ['disableHover', 'enableHover', 'delete'])
   }
 
   enableHover() {
@@ -20,6 +21,18 @@ export default class PocketItem extends Component {
 
   disableHover() {
     this.setState({hover: false})
+  }
+
+  async delete() {
+    const action = [{
+      action: 'delete',
+      item_id: this.props.data.item_id,
+      time: getUnixEpoch()
+    }]
+    const response = await fetch(config.pocketSendDataRequest[0] + `actions=${encodeURI(JSON.stringify(action))}`, config.pocketSendDataRequest[1])
+    const json = await response.json()
+    if (json.status === 1) {document.location = document.location}
+    else {alert('Error attempting delete.')}
   }
 
   render() {
@@ -33,7 +46,7 @@ export default class PocketItem extends Component {
     const actionButtons = (<div>
       <a href={data.resolved_url} target='_blank'><button className='btn btn-sm btn-action margin--small__right'><i className='icon icon-link' /></button></a>
       <button className='btn btn-sm btn-action margin--small__right'><i className='icon icon-edit' /></button>
-      <button className='btn btn-sm btn-action margin--small__right'><i className='icon icon-delete' /></button>
+      <button onClick={this.delete} className='btn btn-sm btn-action margin--small__right'><i className='icon icon-delete' /></button>
       <button className='btn btn-sm btn-action'><i className='icon icon-more-vert' /></button>
     </div>)
     return (<div onMouseEnter={this.enableHover} onMouseLeave={this.disableHover} className='card padding--small__right'>
