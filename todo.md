@@ -1,10 +1,18 @@
 TODO
 ---
+- standalone app for portfolio:
+  - make app static, move server functions to client/compilation
+  - try parcel bundling
+  - electron
+  - github pages demo
+  - redux
+  - restyling
+
 - pocket item functionality
   - edit
     - remove/add tags
 - implement tag container visibility toggle
-- rollmap sourcemaps
+- rollup sourcemaps
 
 ## Low Priority
 - switch to redux, poke around other options
