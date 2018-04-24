@@ -9,7 +9,7 @@ module.exports = {
     // session: '60000', // 1 minute expiration, doesn't persist on browser close
     maxAge: 86400000,
     overwrite: true,
-    httpOnly: true,
+    // httpOnly: true,
     signed: true,
     rolling: false,
     renew: false

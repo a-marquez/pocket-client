@@ -14,6 +14,7 @@ module.exports = {
   },
   getAccessToken: async (consumer_key, request_token) => {
     const response = await fetch('https://getpocket.com/v3/oauth/authorize', {...baseRequestOptions, body: JSON.stringify({consumer_key, code: request_token})})
+    console.log(response.status, response.statusText, response.headers)
     return await response.json()
   },
   getData: async (consumer_key, access_token, options) => {

@@ -59,5 +59,6 @@ app.use(stylus('./src/public', {use: [require('normalize.css.styl')(), require('
 app.use(static('./src/public', {defer: true}))
 app.use(static('./build/'))
 
-https.createServer(serverOptions, app.callback()).listen(8080)
+// https.createServer(serverOptions, app.callback()).listen(8080)
+require('http').createServer(app.callback()).listen(8080)
 console.log('server listening on port 8080')
