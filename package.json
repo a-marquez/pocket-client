@@ -4,18 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others 'node src/server' 'rollup --config --watch'",
+    "start": "concurrently --kill-others 'npm run serve' 'npm run build:watch'",
     "serve": "node src/server",
-    "rollup": "rollup --config",
+    "build:watch": "parcel watch --out-dir build/js src/public/js/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.1",
     "koa": "^2.5.0",
     "koa-route": "^3.2.0",
@@ -24,17 +20,10 @@
     "koa-stylus-parser": "^2.0.2",
     "node-fetch": "^2.1.1",
     "normalize.css.styl": "^4.1.1",
+    "parcel-bundler": "^1.7.1",
     "ramda": "^0.25.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
-    "rollup": "^0.57.1",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-commonjs": "^9.1.0",
-    "rollup-plugin-jsx": "^1.0.3",
-    "rollup-plugin-node-globals": "^1.2.0",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^3.0.0",
     "stylus-case": "github:a-marquez/stylus-case"
   }
 }

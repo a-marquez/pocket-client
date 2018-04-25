@@ -1,5 +1,6 @@
 NOTES
 ---
+- parcel hot module replacement seems to crash if package.json is overwritten without changes, may crash on actual changes too
 - pocket api does not support cors
 - client-side is not viable, lack of cors means the queries can only return as opaque responses that are not consumable by client javascript
 - portfolio friendly distributions could be an npm service, packaged electron app, and a github pages demo with a localStorage backed mock api

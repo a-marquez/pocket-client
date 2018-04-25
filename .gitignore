@@ -21,4 +21,5 @@ reference
 # binaries
 build
 dist
+.cache
 
