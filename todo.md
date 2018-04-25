@@ -1,20 +1,19 @@
 TODO
 ---
-- standalone app for portfolio:
-  - make app static, move server functions to client/compilation
-  - try parcel bundling
-  - electron
-  - github pages demo
-  - redux
-  - restyling
+- try parcel bundling
+- redux
+- restructuring
+- github pages demo
+  - localStorage-backed mock api for pocket
+- restyling
 
 - pocket item functionality
   - edit
     - remove/add tags
 - implement tag container visibility toggle
-- rollup sourcemaps
 
 ## Low Priority
+- electron
 - switch to redux, poke around other options
   - make components pure
 - tag functionality
