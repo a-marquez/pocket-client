@@ -4,7 +4,7 @@ const pocket = require('../pocket-api')
 module.exports = async (ctx) => {
   if (ctx.session.is_authenticated === false) {
     const response_json = await pocket.getRequestToken(config.pocket_consumer_key, config.pocket_redirect_uri)
-    const authentication_url = `https://getpocket.com/auth/authorize?request_token=${response_json.code}&redirect_uri=https://localhost:8080/success`
+    const authentication_url = `https://getpocket.com/auth/authorize?request_token=${response_json.code}&redirect_uri=http://localhost:8080/success`
     ctx.session.pocket_request_token = response_json.code
     ctx.body = `
       <link rel='stylesheet' href='./css/main.css'>

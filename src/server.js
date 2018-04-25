@@ -1,5 +1,5 @@
 const fs = require('fs')
-const https = require('https')
+const http = require('http')
 const Koa = require('koa')
 const _ = require('koa-route')
 const session = require('koa-session')
@@ -9,11 +9,6 @@ const static = require('koa-static')
 const {hotRouteLoad} = require('./node-utilities')
 const config = require('./server-config')
 const pocket = require('./pocket-api')
-
-const serverOptions = {
-  key: fs.readFileSync('./server.key'),
-  cert: fs.readFileSync('./server.crt')
-}
 
 const app = new Koa()
 
@@ -59,5 +54,5 @@ app.use(stylus('./src/public', {use: [require('normalize.css.styl')(), require('
 app.use(static('./src/public', {defer: true}))
 app.use(static('./build/'))
 
-https.createServer(serverOptions, app.callback()).listen(8080)
+http.createServer(app.callback()).listen(8080)
 console.log('server listening on port 8080')

@@ -1,5 +1,5 @@
 export default {
   localStorageKey: 'pocketData',
-  pocketGetDataRequest: ['https://localhost:8080/pocket-get?detailType=complete&state=all', {credentials: 'same-origin'}],
-  pocketSendDataRequest: ['https://localhost:8080/pocket-send?', {credentials: 'same-origin'}]
+  pocketGetDataRequest: ['http://localhost:8080/pocket-get?detailType=complete&state=all', {credentials: 'same-origin'}],
+  pocketSendDataRequest: ['http://localhost:8080/pocket-send?', {credentials: 'same-origin'}]
 }
