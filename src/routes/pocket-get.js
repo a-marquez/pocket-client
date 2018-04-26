@@ -1,7 +1,7 @@
 const config = require('../server-config')
 const pocket = require('../pocket-api')
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   if (ctx.session.is_authenticated === false) {
     ctx.throw(401, 'Lacking pocket authentication')
   } else {

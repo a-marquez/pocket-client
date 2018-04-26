@@ -1,10 +1,12 @@
 TODO
 ---
-- try parcel bundling
+- move utilities own repos
+- consume node-utilities and js-utilities as dependencies
 - redux
 - restructuring
 - github pages demo
   - localStorage-backed mock api for pocket
+- use normalizr to enforce app data schemata for pocket api responses
 - restyling
 
 - pocket item functionality

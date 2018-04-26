@@ -7,12 +7,22 @@
     "start": "concurrently --kill-others 'npm run serve' 'npm run build:watch'",
     "serve": "node src/server",
     "build:watch": "parcel watch --out-dir build/js src/public/js/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "test": "xo"
+  },
+  "xo": {
+    "extends": "xo-react",
+    "env": "browser",
+    "space": true,
+    "semicolon": false
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^3.5.1",
+    "eslint-config-xo-react": "^0.16.0",
+    "eslint-plugin-react": "^7.7.0",
     "koa": "^2.5.0",
     "koa-route": "^3.2.0",
     "koa-session": "^5.8.1",
@@ -24,6 +34,8 @@
     "ramda": "^0.25.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
-    "stylus-case": "github:a-marquez/stylus-case"
+    "regenerator-runtime": "^0.11.1",
+    "stylus-case": "github:a-marquez/stylus-case",
+    "xo": "^0.20.3"
   }
 }
