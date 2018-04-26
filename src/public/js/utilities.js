@@ -1,6 +1,7 @@
 export const domainRegex = /(?:https?)?(?::\/\/)?(?:www\.)?([\w\.]+)/
 export function log(_) {
-  console.log(_); return _
+  console.log(_)
+  return _
 }
 export function debug(_) {
   return _

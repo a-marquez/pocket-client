@@ -15,12 +15,20 @@
     "extends": "xo-react",
     "env": "browser",
     "space": true,
-    "semicolon": false
+    "semicolon": false,
+    "rules": {
+      "jsx-quotes": [
+        "error",
+        "prefer-single"
+      ],
+      "capitalized-comments": 0
+    }
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^3.5.1",
+    "eslint-config-xo": "^0.21.0",
     "eslint-config-xo-react": "^0.16.0",
     "eslint-plugin-react": "^7.7.0",
     "koa": "^2.5.0",

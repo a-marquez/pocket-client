@@ -1,14 +1,12 @@
-const fs = require('fs')
 const http = require('http')
 const Koa = require('koa')
 const _ = require('koa-route')
 const session = require('koa-session')
 const stylus = require('koa-stylus-parser')
-const static = require('koa-static')
+const staticServe = require('koa-static')
 
 const {hotRouteLoad} = require('./node-utilities')
 const config = require('./server-config')
-const pocket = require('./pocket-api')
 
 const app = new Koa()
 
@@ -22,10 +20,10 @@ app.use(async (ctx, next) => {
 
 // logger
 app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}`);
+  const start = Date.now()
+  await next()
+  const ms = Date.now() - start
+  console.log(`${ctx.method} ${ctx.url} - ${ms}`)
 })
 
 // session
@@ -38,7 +36,7 @@ app.use(async (ctx, next) => {
     const views = ctx.session.views || 0
     ctx.session.views = views + 1
   }
-  ctx.session.is_authenticated = ctx.session.is_authenticated || false
+  ctx.session.isAuthenticated = ctx.session.isAuthenticated || false
   await next()
 })
 
@@ -51,8 +49,8 @@ app.use(_.get('/pocket-get', hotRouteLoad('./routes/pocket-get')))
 app.use(_.get('/pocket-send', hotRouteLoad('./routes/pocket-send')))
 app.use(_.get('/logout', hotRouteLoad('./routes/logout')))
 app.use(stylus('./src/public', {use: [require('normalize.css.styl')(), require('stylus-case')()]}))
-app.use(static('./src/public', {defer: true}))
-app.use(static('./build/'))
+app.use(staticServe('./src/public', {defer: true}))
+app.use(staticServe('./build/'))
 
 http.createServer(app.callback()).listen(8080)
 console.log('server listening on port 8080')

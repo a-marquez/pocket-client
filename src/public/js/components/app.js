@@ -1,13 +1,13 @@
-import React from 'react'
-import {Component} from 'react'
-import * as R from 'ramda'
-import {compose, prop, propEq, equals, keys, values, descend, isNil, anyPass, when, bind, __, cond, T, identity, has} from 'ramda'
-import {map, contains, filter, reject, append, sort, splitWhen, uniq, flatten} from 'ramda'
+import React, {Component} from 'react'
+import {
+  compose, prop, propEq, equals, keys, values, descend, isNil, anyPass, __, cond, T, identity, has,
+  map, contains, filter, reject, append, sort, splitWhen, uniq, flatten
+} from 'ramda'
 
-import PocketItem from './components/PocketItem.js'
+import config from '../config'
+import {bindClassFns, getUnixEpoch} from '../utilities'
 
-import config from './config.js'
-import {bindClassFns, getUnixEpoch, log, debug} from './utilities.js'
+import PocketItem from './PocketItem'
 
 async function hydrateLocalStorageData(localStorageKey, dataRequest) {
   const localStorageData = localStorage.getItem(localStorageKey)
@@ -129,32 +129,32 @@ export default class App extends Component {
     ])(this.state.pocketData)
     const ifTagActive = contains(__, this.state.activeTags)
     return (
-      <div className="absolute flex flex-column fill">
-        <div className="margin">
-          <div className="tags-container">
+      <div className='absolute flex flex-column fill'>
+        <div className='margin'>
+          <div className='tags-container'>
             {isDataLoaded ?
               map(tag => {
-                return <button key={tag} data-tag={tag} onClick={this.toggleTagFilter} className={`btn btn-sm ${ifTagActive(tag) ? 'btn-primary' : ''}`} disabled={isUntaggedFilterEnabled}>{tag}</button>
+                return <button key={tag} className={`btn btn-sm ${ifTagActive(tag) ? 'btn-primary' : ''}`} data-tag={tag} disabled={isUntaggedFilterEnabled} onClick={this.toggleTagFilter} type='button'>{tag}</button>
               }, this.state.tags) :
-              <div className="loading loading-lg"/>
+              <div className='loading loading-lg'/>
             }
           </div>
           {isDataLoaded ?
-            (<div>
-              <div className="margin__top absolute">
-                <button className="btn btn-sm btn-action"><i className="icon icon-arrow-up"/></button>
-                <button onClick={this.toggleUntaggedFilter} className={`btn btn-sm margin--small__left ${isUntaggedFilterEnabled ? 'btn-primary' : ''}`}>untagged</button>
+            <div>
+              <div className='margin__top absolute'>
+                <button type='button' className='btn btn-sm btn-action'><i className='icon icon-arrow-up'/></button>
+                <button type='button' onClick={this.toggleUntaggedFilter} className={`btn btn-sm margin--small__left ${isUntaggedFilterEnabled ? 'btn-primary' : ''}`}>untagged</button>
               </div>
-              <div className="margin__top float-right">
-                <button className="btn btn-sm btn-action"><i className="icon icon-plus"/></button>
-                <button onClick={this.userRefreshData} className="btn btn-sm btn-action margin--small__left"><i className="icon icon-refresh"/></button>
+              <div className='margin__top float-right'>
+                <button type='button' className='btn btn-sm btn-action'><i className='icon icon-plus'/></button>
+                <button type='button' onClick={this.userRefreshData} className='btn btn-sm btn-action margin--small__left'><i className='icon icon-refresh'/></button>
               </div>
-            </div>) :
+            </div> :
             ''
           }
         </div>
-        <div className="flex-grow-1 overflow-auto margin__horizontal margin__bottom fill__vertical">
-          <div className="item-container overflow-auto fill__vertical back-white">
+        <div className='flex-grow-1 overflow-auto margin__horizontal margin__bottom fill__vertical'>
+          <div className='item-container overflow-auto fill__vertical back-white'>
             {isDataLoaded === true ?
               map(item => {
                 return <PocketItem key={item.item_id} data={item}/>
