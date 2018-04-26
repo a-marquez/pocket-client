@@ -7,7 +7,7 @@ import {
 import config from '../config'
 import {bindClassFns, getUnixEpoch} from '../utilities'
 
-import PocketItem from './PocketItem'
+import PocketItem from './pocket-item'
 
 async function hydrateLocalStorageData(localStorageKey, dataRequest) {
   const localStorageData = localStorage.getItem(localStorageKey)
