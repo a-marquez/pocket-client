@@ -1,4 +1,4 @@
-export const domainRegex = /(?:https?)?(?::\/\/)?(?:www\.)?([\w\.]+)/
+export const domainRegex = /(?:https?)?(?::\/\/)?(?:www\.)?([\w.]+)/
 export function log(_) {
   console.log(_)
   return _
