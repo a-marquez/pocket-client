@@ -1,5 +1,9 @@
 import React from 'react'
 
-export default ({title, url}) => (
-  <div>{title} - {url}</div>
+const Item = ({title, url}) => (
+  <div className='padding--small'>
+    {title} {url}
+  </div>
 )
+
+export default Item

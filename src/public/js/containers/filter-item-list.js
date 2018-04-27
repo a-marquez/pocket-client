@@ -20,7 +20,7 @@ export const getFilteredItems = (items, activeTags) => {
 }
 
 const mapStateToProps = state => ({
-  items: getFilteredItems(state.items, state.activeTags)
+  items: getFilteredItems(state.entities.items, state.activeTags)
 })
 
 export default connect(
