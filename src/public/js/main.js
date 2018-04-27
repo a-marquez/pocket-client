@@ -8,7 +8,7 @@ import logger from 'redux-logger'
 
 import * as reducers from './reducers'
 import {initialState} from './fixtures'
-import ReduxApp from './components/redux-app'
+import App from './components/app'
 import {retrieveItems} from './actions'
 
 const reduxApp = combineReducers(reducers)
@@ -20,9 +20,13 @@ const store = createStore(
 
 render(
   <Provider store={store}>
-    <ReduxApp/>
+    <App/>
   </Provider>,
   document.getElementById('root')
 )
 
-store.dispatch(retrieveItems({}))
+store.dispatch(retrieveItems({
+  detailType: 'complete',
+  state: 'all',
+  count: 2
+}))
