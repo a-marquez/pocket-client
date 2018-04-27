@@ -1,40 +1,37 @@
-export const initialState = {
+const initialState = {
   entities: {
     items: {
       1: {
         id: 1,
         title: 'Google',
         url: 'https://google.com',
-        tags: [1, 2, 3]
+        tags: ['javascript']
       },
       2: {
         id: 2,
         title: 'StackOverflow',
         url: 'https://stackoverflow.com',
-        tags: [1]
+        tags: ['css']
       },
       3: {
         id: 3,
         title: 'Github',
         url: 'https://github.com',
-        tags: [3]
+        tags: []
       }
     },
     tags: {
-      1: {
-        id: 1,
+      'javascript': {
+        id: 'javascript',
         name: 'javascript'
       },
-      2: {
-        id: 2,
+      'css': {
+        id: 'css',
         name: 'css'
-      },
-      3: {
-        id: 3,
-        name: 'html'
       }
     }
   },
-  activeTags: []
+  activeTags: [],
+  lastUpdated: 0 // unix epoch
 }
-
+export default initialState
