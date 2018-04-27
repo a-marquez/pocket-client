@@ -1,7 +1,5 @@
 TODO
 ---
-- move node-utilities to own repo
-- consume node-utilities and js-utilities as dependencies
 - redux
 - restructuring
 - github pages demo

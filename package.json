@@ -12,6 +12,7 @@
     "test": "xo"
   },
   "xo": {
+    "parser": "babel-eslint",
     "extends": "xo-react",
     "env": "browser",
     "space": true,
@@ -21,12 +22,15 @@
         "error",
         "prefer-single"
       ],
+      "react/prop-types": 0,
       "capitalized-comments": 0
     }
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "concurrently": "^3.5.1",
     "eslint-config-xo": "^0.21.0",
     "eslint-config-xo-react": "^0.16.0",
@@ -42,6 +46,9 @@
     "ramda": "^0.25.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
     "regenerator-runtime": "^0.11.1",
     "stylus-case": "github:a-marquez/stylus-case",
     "xo": "^0.20.3"
