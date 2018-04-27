@@ -17,6 +17,10 @@
     "env": "browser",
     "space": true,
     "semicolon": false,
+    "ignore": [
+      "**/fixture{s,}/**",
+      "**/experiment{s,}.js"
+    ],
     "rules": {
       "jsx-quotes": [
         "error",
@@ -32,10 +36,12 @@
     "babel-eslint": "^8.2.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "concurrently": "^3.5.1",
+    "cross-fetch": "^2.1.1",
     "es6-enum": "^1.1.0",
     "eslint-config-xo": "^0.21.0",
     "eslint-config-xo-react": "^0.16.0",
     "eslint-plugin-react": "^7.7.0",
+    "humps": "^2.0.1",
     "koa": "^2.5.0",
     "koa-route": "^3.2.0",
     "koa-session": "^5.8.1",
@@ -43,6 +49,7 @@
     "koa-stylus-parser": "^2.0.2",
     "node-fetch": "^2.1.1",
     "normalize.css.styl": "^4.1.1",
+    "normalizr": "^3.2.4",
     "parcel-bundler": "^1.7.1",
     "ramda": "^0.25.0",
     "react": "^16.3.0",
@@ -50,6 +57,7 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "regenerator-runtime": "^0.11.1",
     "stylus-case": "github:a-marquez/stylus-case",
     "xo": "^0.20.3"

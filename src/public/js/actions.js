@@ -1,4 +1,6 @@
+import fetch from 'cross-fetch'
 import Enum from 'es6-enum'
+import {paramateriseObject} from './ramda-utilities'
 
 // action types
 export const actionTypes = new Enum(
@@ -20,11 +22,25 @@ export function toggleTag(id) {
   return {type: actionTypes.TOGGLE_TAG, id}
 }
 
-export function retrieveItems(options, status, response) {
+function retrieveItems(options, response) {
   return {
     type: actionTypes.RETRIEVE_ITEMS,
     options,
-    status,
     response
+  }
+}
+
+export function retrieveItemsThunk(options) {
+  return function (dispatch) {
+    dispatch(retrieveItems(options))
+    return fetch(
+      `http://localhost:8080/pocket-get?${paramateriseObject(options)}`,
+      {credentials: 'same-origin'}
+    )
+      .then(
+        response => response.json(),
+        console.error
+      )
+      .then(json => dispatch(retrieveItems(options, json)))
   }
 }

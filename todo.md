@@ -1,6 +1,8 @@
 TODO
 ---
 - redux
+  - calculate tags from items
+    - perhaps brand new tags should require items to attach to
 - restructuring
 - github pages demo
   - localStorage-backed mock api for pocket
@@ -13,6 +15,10 @@ TODO
 - implement tag container visibility toggle
 
 ## Low Priority
+- remove config.js
+- add husky, configure lint git hooks
+- add server-side safeguards for querying pocket api (throttling, debouncing)
+- consider changing to modular organisation instead of type-grouped - https://gist.github.com/nicolas-briemant/0b29950369ec385b16d4b43ca5585e62
 - electron
 - switch to redux, poke around other options
   - make components pure

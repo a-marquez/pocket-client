@@ -4,18 +4,22 @@ import React from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {combineReducers, createStore, applyMiddleware} from 'redux'
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
+import thunk from 'redux-thunk'
 
 import * as reducers from './reducers'
-import {initialState} from './fixtures'
+// import initialState from './fixtures/initial-state'
 import App from './components/app'
-import {retrieveItems} from './actions'
+import {retrieveItemsThunk} from './actions'
 
 const reduxApp = combineReducers(reducers)
 const store = createStore(
   reduxApp,
-  initialState,
-  applyMiddleware(logger)
+  // initialState,
+  applyMiddleware(
+    thunk,
+    // logger
+  )
 )
 
 render(
@@ -25,8 +29,9 @@ render(
   document.getElementById('root')
 )
 
-store.dispatch(retrieveItems({
+store.dispatch(retrieveItemsThunk({
   detailType: 'complete',
   state: 'all',
-  count: 2
+  offset: 30,
+  count: 10
 }))
